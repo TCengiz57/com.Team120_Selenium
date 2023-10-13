@@ -1,0 +1,179 @@
+ SELENIUM day01 Ders Tekrari
+1-  Otomasyon ile yazilim testi aslinda iyi bir orkestrasyon gerektirir.
+Elimizdeki enstrumanlari doğru kullanmali ve mümkün olduğunca temiz kod yazarak testlerimizi calistirmaliyiz.
+2-  Kullanacagimiz ilk enstrümanlar
+-   Java : Otomasyon yapmak için kodlama bilgisine ihtiyaç vardir, biz de Java kullanacagiz.
+-   Selenium : Browser’lari otomasyonla calistiracak tool’lar için bir suite’dir.
+Biz de selenium ile calisacak Junit, TestNG ve Cucumber framework’leri ile calisacagiz.
+Selenium birçok programlama dili ve bir cok tool ile calisabilir.
+Selenium’da 4 bileşen vardir ama biz testlerimizi otomasyon ile calistirmak için Selenium WebDriver kullanacagiz.
+Selenium WebDriver bizim elimiz ve gözümüzle, klavye ve mouse kullanarak yaptigimiz işlemlerin çoğunu otomasyon
+ile yapmamiza imkan tanir.
+-   IntelliJ : IDE java kodlarini compile edebilmek için kullanacagiz
+-   Framework : Ortak calisma için dizayn edilmiş proje çerçeveleridir.
+Framework’ler sadece neyin nereye konulacagini söylemez, ayrica isimizi kolaylastiracak pekcok enstrüman verirler.
+    Driver objesinin olusturulmasi:
+    WebDriver driver = new ChromeDriver();
+    Bu driver objesi ile istenen adrese gidis sağlanir.
+    driver.get();
+            day02 Ders Tekrari
+1 - Selenium WebDriver bizim elimizle ve gözümüzle, klavye mouse kullanarak
+    yaptigimiz işlemleri bizim adimiza otomasyonla yapma imkani verir.
+2-  driver objesi ile direk yapabileceğimiz işlemler sinirlidir.
+    Bir url’e gidebilir, gittiğimiz web sayfasinin title'ini alabilir,
+    acilan pencerenin büyüklüğünü ve konumunu belirleyebiliriz.
+3-  Ancak driver’in web sayfasinda istediğimiz işlemleri yapabilmesi için
+    webelementleri driver’a tarif etmemiz gerekir.
+4-  Bir web sayfasindaki etkileşimli veya etkilesimsiz her nesne bir Webelement’tir.
+5-  Web elementleri biz görseller seklinde goruruz ama aslinda bilgisayarimiz,
+    browser'imiz ve server'lar webelement’lere HTML kodlarina göre davranirlar.
+6-  Bizim HTML kodlarina müdahale etme, onlari değiştirme veya
+    HTML kodlari üzerindeki attribute’leri anlamlandirma gibi bir görevimiz yoktur.
+7-  Bizim amacimiz webelementlerin HTML kodlarini inceleyip,
+    onlar için driver’in bulabileceği unique tarif edicileri(locator) olusturmaktir.
+8-  Locator’lari da Selenium bizim için hazirlamistir. Toplam 8 Locator vardir.
+    - Bunlardan 6 tanesi front-end developer’in hazirladigi HTML kodlarina bagimlidir.
+    - XPath ve CssSelector ise her turlu webelementi locate edebilecek özel bir tasarima sahiptir.
+            day03 Ders Tekrari
+1-  Bir webelementi driver'a tanitmak icin findElement()'unu kullaniyoruz.
+2-  Bir findElement'i bir sonuc değil birden fazla sonuc donduruyorsa findElements()'nu kullaniyoruz.
+    Bu selilde Elements'leri bir listeye kaydederiz ve listeden istedigimiz webelementi alabiliriz.
+3- Bizim bir websayfasinda bulunan webelement’i kullanabilmemiz icin, driver’a bu
+   element(ler)’i buldurmamiz gerekir. Driver’in web elementi bulmasi icin 2 seye
+   ihtiyacimiz vardir.
+   - driver ile kullanacagimiz hazir method
+   - driver.findElement(locator) : bize bir tane webElement dondurur. Locator’a
+   uygun birden fazla webElement varsa bize ilkini dondurur. Locator’a uygun
+   hic element bulamazsa NoSuchElementException verir.
+   -driver.findElements(locator) : bize verdigimiz locator’a uyan tum
+   webelementleri bir liste olarak dondurur. Bu liste webelementlerden olustugu
+   icin direk yazdirmamiz mumkun olmaz, bir for-each loop ile listedeki herbir
+   webelementi ele alip getText( ) ile yazdirabiliriz.
+4- By.className() kullandığımız zaman eger class attribute'u bosluk iceriyorsa saglikli calismaz.
+5- Locator : driver’a bir HTML kodun bulunmasi icin yer gosterecek hazir locate
+   stratejisidir. Selenium kullanimimiza hazir olarak 8 adet locator olusturmustur.
+   Bu locator’larin 6 tanesi direk HTML kod yazilirken kullanilan tag ve attribute’lere
+   bagimlidir. Ornegin HTML kodunda id attribute’u yoksa By.id locator’i kullanilamaz.
+   Ayni sekilde HTML element link degilse By.linkText veya By.partialLinkText
+   kullanilamaz. Bu locator’lar sunlardir: 1-By.id, 2- By.name, 3-By.className, 4- By.tagname,
+   5- By.linkText ve 6-By.partialLinkText
+6-  webELement. submit();
+    Web Element ile işlem yaparken ENTER tuşuna basma işlemini yapar.
+7- webElement.sendKeys( ..keysToSend: "istenen Metin" + Keys.ENTER);
+    Web element’e istenen metni yollayip, sonra ENTER tuşuna basar.
+8- webElement. isEnabled() ;
+    Web element erişilebilir ise true, yoksa false döner.
+9- webELement. isDisplayed() ;
+    Web element gorunuyor ise true, yoksa false döner.
+10- webElement. isSelected () ;
+    Web element secili ise true, yoksa false döner.
+
+
+       day04 Ders Tekrari
+
+
+1- Bir web element’in 3 bileseni bulunur.
+
+       1) Tag :  input
+
+       2) Attributes : type, id, value, name, autocomplete, placeholder, class, dir,
+        tabindex, aria-label
+
+       3) Attribute Values : text, twotabsearchtextbox, field-keywords …..
+
+        Relative Xpath bu 3 bilesenin belirlenen sekilde birlikte kullanilmasi ile olusur.
+        Her Xpath ile unique bir sonuc elde edilemeyebilir ancak unique bir deger mutlaka
+        bulunur.
+
+        //tagName[@attributeIsmi=‘attributeValue']
+
+2-  Hedef unique olarak webelement’i locate etmektir. Daha az bilesenle de unique
+        degere ulasilabilen Xpath’ler de kullanilabilir.
+
+        ==> driver.findElement(By.xpath( xpathExpression: "//input" )); Sadece tag ismi ile,
+
+        ==> driver.findElement(By.xpath( xpathExpression: "// * [@type= 'text' ] " )); tag ismi farketmeksizin,
+
+        ==> driver.findElement(By.xpath( xpathExpression: "//input[@ *='text']" )); Attribute farketmeksizin,
+
+        ==> driver.findElement(By.xpath( xpathExpression: "//input [@type] ") ) ; Attribute value farketmeksizin,
+
+        ==> driver.findElementCBy.xpath( xpathExpression: "//div[@id='logo' or class='flex-col logo' ] "));
+
+        ==> driver.findElement(By.xpath( xpathExpression: "//div[@id= 'Logo' and cLass='fLex-coL Logo' ] "));
+        day05 Ders Tekrari
+1)  WebDriverManager.chromedriver().setup(); Yeni WebDriver Yontemimizdir.
+    Setproperty() ile dosya yolunu kopyalayıp uzun uzun yazmamiza gerek kalmadi.
+    Maven Repository'den Selenium kütüphanemizi ekleyip, yenileyince
+    artik WebDriverManager'i yukaridaki sekilde yazmamiz yeterlidir.
+    Ancak, Selenium 4.8 versiyonundan itibaren kendi WebDriver'ini olusturdugu icin
+    biz WebdriverManager'i yazmasak da Selenium otomatik olarak kendi WebDriver'ini
+    devreye soktugunu bilmemiz gerekir. Sirketlerin kendi webdriver'larini calistirdiklari
+    icin biz el aliskanligi icin yazmaya devam ediyoruz.
+2)  @Test notasyonu siradan method'lari bagimsiz olarak calistirabilmemize imkan tanir.
+    Boylece main method bagimliligi ortadan kalkar ve biz istedigimiz testi tek basina
+    veya class level'dan toplu olarak calistirabiliriz.
+    Ayrica ileride gorecegimiz sekilde test method'larini belirli gruplara dahil edip
+    toplu olarak da calistirabiliriz.
+    @Test notasyonuna sahip methodlar toplu olarak calistirildiginda
+    hangi sira ile calisacagina dair bir kural yoktur. JUnit bu koduda bir yontem gelistirmemistir.
+    Calisma sirasi ONGORULEMEZ ve KONTROL EDILEMEZ.
+    Eger bir test method'u @ignore olarak isaretlenirse Selenium o method'u ignore eder,calistirmaz.
+    JUnit bize calisan testlerden kacinin PASSED, kacinin FAILED oldugunu verir.
+    ANCAK JUnit testlerin gecip gecmedigini, kodlarda bir sorun yasanip yasanmamasina baglar.
+    Kodlar sorunsuz calisirsa, Test PASSED,bir exception olusursa, Test FAILED olarak kaydedilir.
+           day06 Ders Tekrari
+1-  Framework'ler calisma ortamını düzenlemenin yaninda bizim için faydali ve kolaylik saglayici işlevler sağlarlar.
+2-  Junit ile hayatimiza giren en buyuk yenilik notasyonlardir. @ ile başlayan notasyonlar,
+    framework'un işleyişine müdahale edecek kucuk bilgilere sahiptirler.
+3-  @Test: Siradan bir method cagrilmadan calismaz. @Test notasyonu eklenen method'lar ise bagimsiz olarak calistirilabilir.
+    Bu da bizi main method bagimliligindan kurtarir.
+4-  @Ignore : yazildigi test notasyonunun ignore edilmesini sağlar.
+5-  @Before ve @After: Her test method'undan önce calismasini istediğimiz siradan bir method varsa,
+    @Before ile, her test method'undan sonra calismasini istediğimiz siradan bir method varsa da @After ile işaretleriz.
+6-  @BeforeClass ve @AfterClass : Eğer her test method'undan önce ve sonra değil de class ilk calismaya basladiginda
+    ve class calismayi bitirdiğinde devreye girmesini istediğimiz siradan method'lar varsa kullanilir.
+7-  Ornegin derste de yaptigimiz calismadaki gibi class'taki test methodlarimizin hepsi icin tek bir adrese gitmek
+    istiyorsak @BeforeClass'i icindeki method'a driver.get(..) ile belirtmemiz yeterli olacaktır. Boylece her @Test
+    notasyonu icindeki method calismadan once @BeforeClass methodu calisacagi icin o adrese gidecektir.
+8-  @BeforeClass ve @AfterClass notasyonlarının @Before ve @After notasyonlarından ayrismasinin onemli bir farki da
+    STATİC olmak zorunda olmalaridir.
+9-  Assertions : JUnit test method'larinin PASSED veya FAILED olduklarina o test method’una ait kodlarin sorunsuz
+    calisip calismadigina bakarak karar verir. If-Else ile yapılan testlerde testimiz failed olsa bile kod sorunsuz
+    calistigi için JUnit testi PASSED olarak işaretler.
+    JUnit'in bu özelliğinin saglikli calismasi için assertions kullanilmali.
+        day07 Ders Tekrari
+1-  4 cesit Assertions vardir:
+    1) Assert.assertEquals()
+    2) AssertassertNotEquals()
+    3) Assert.assertTrue()
+    4) Assert.assertFalse()
+    * Amazon ornegindeki; Title'in "amazon" icerdigini test etmemizi isteyen soruda da soru kalıbı
+    (içermesi=> olumlu olduğundan) Assert.assertTrue()'nu kullaniyoruz.
+    * BestBuy orneginde ise; sayfa URL’inin https://www.bestbuy.com/ ‘a esit oldugunu test etmemizi
+    isteyen soruda da soru kalıbı (eşit mi => eşit olma sorusu olumlu olduğundan)
+    Assert.assertEquals()'nu kullaniyoruz.
+    * Youtube orneginde ise; sayfa basliginin “youtube” olmadigini dogrulamamizi test etmemizi
+     isteyen soruda da soru kalıbı (içermemesi=> olumsuz olduğundan) Assert.assertFalse()'nu
+     veya Assert.assertNotEquals()'unu kullanabiliyoruz.
+2-  Bir test methodunun icinde birden fazla Assertion varsa bu assertion'lardan bir tanesi FAILED olursa
+    kodun calismasi o satirda durur. Geriye kalan assertion'lar kontrol edilmemis olur.
+    Eger bir class calistiginda tum assortion'larin mutlaka gozden gecirilmesini
+    istiyorsak her assortion icin ayri test method'u olusturabiliriz.
+3-  Test method'larinin ismi de yaptigi is ile uyumlu olursa konsolda neyin calisip
+    neyin calismadigini kolayca görebiliriz.
+4-  Checkbox; birden fazla secim yapmamiza imkan taniyan bir seçim araci iken
+    RadioButton; tek secim imkani taniyan bir secim aracidir.
+5-  Checkbox ve RadioButton elementlerini locate alma islemlerimizde ve test etme methodlarimizda yine
+    assertion'lar ile ayni sekilde handle ediyoruz. Burada Checkbox ve RadioButton elementleri seçim yapmamizi
+    gerektiren elementler olduğu icin is.Selected()'larini kullaniyoruz.
+6-  Dropdown menulerini handle etmek icin ise 3 yontem uyguluyoruz.
+    1) Dropdown webelement’i locate edin.
+    2) Select class’indan bir obje olusturun ve locate edilen
+       dropdown elementini parametre olarak yazin.
+    3) select objesi ile Select class’inda bulunan
+       method’lardan uygun olani ile istediginiz option’i secin.
+       * Bu method'lardan da 3 yaygin kullanimi olanlari gormustuk. Bunlar:
+       - select.selectByValue()
+       - select.selectByIndex()
+       - select.selectByVisibleText()
